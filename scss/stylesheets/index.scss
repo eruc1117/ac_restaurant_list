@@ -58,6 +58,24 @@
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.crud {
+  margin-top: -5%;
+  margin-bottom: 5%;
+  text-align: end;
+  .edit {
+    margin-right: 3%;
+  }
+  .detail {
+    margin-right: 3%;
+  }
+  .delete {
+    border: black;
+    border-width: 1px;
+    border-style:solid;
+    padding: 2px;
+  }
+}
+
 @media screen and (max-width: 992px) {
   
   .card img{
