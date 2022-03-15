@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
+    "seed": "node models/seeds/restaurantSeeder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,6 +15,7 @@
   "dependencies": {
     "express": "^4.17.3",
     "express-handlebars": "^3.0.0",
+    "mongoose": "^6.2.6",
     "node-sass-middleware": "^1.0.1"
   }
 }
