@@ -5,6 +5,10 @@ const exphbs = require('express-handlebars')//require template engine
 const path = require('path')
 const sassMiddleware = require('node-sass-middleware')//require scss
 
+
+//連線mongoose
+require('./config/mongoose')
+
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -19,8 +23,18 @@ app.use(
 )
 app.use(express.static('public'))
 
+const restaurantModel = require('./models/restaurantModel')
+
 app.get('/', (req, res) => {
-  res.render('index')
+  async function createIndexPage() {
+    try {
+      const restaurantList = await restaurantModel.find().lean()
+      res.render('index', { restaurantList })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  createIndexPage()
 })
 
 app.listen(PORT, () => {
