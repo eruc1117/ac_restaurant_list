@@ -1,0 +1,43 @@
+@mixin displayFlex ($align) {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: $align;
+  align-content: $align;
+}
+
+h1 {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  text-align: center;
+}
+
+.edit-container {
+  @include displayFlex(center);
+  .input-block {
+  @include displayFlex(flex-start);
+  margin-bottom: 20px;
+  }
+}
+
+label {
+  margin-bottom: 0%;
+}
+
+input {
+  width: 300px;
+  height: 40px;
+}
+#preview {
+  width: 150px;
+  margin-bottom: 3px;
+}
+@media screen and (min-width: 600px) {
+  input {
+  width: 400px;
+  }
+  #preview {
+  width: 200px;
+}
+}

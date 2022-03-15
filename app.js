@@ -14,6 +14,9 @@ require('./config/mongoose')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+//表單資料處理
+app.use(express.urlencoded({ extended: true }))
+
 app.use(
   sassMiddleware({
     src: path.join(__dirname, 'scss'),
