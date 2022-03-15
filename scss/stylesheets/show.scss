@@ -1,0 +1,38 @@
+.form-control::placeholder {
+  color: #aaaaaa;
+  font-size: 0.8rem;
+}
+
+.btn-major {
+  background-color: #9b4b4b;
+  color: white;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #ced4da;
+}
+
+.card {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.restaurant-category {
+  color: #666666;
+  font-size: 0.8rem;
+}
+
+.restaurant-show-title {
+  position: relative;
+  top: -100px;
+  color: white;
+  text-align: center;
+  font-size: 3rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+  .restaurant-show-title {
+    font-size: 2rem;
+  }
+}
