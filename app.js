@@ -4,6 +4,7 @@ const PORT = 3000
 const exphbs = require('express-handlebars')//require template engine
 const path = require('path')
 const sassMiddleware = require('node-sass-middleware')//require scss
+const routes = require('./routes')
 
 
 //連線mongoose
@@ -23,19 +24,7 @@ app.use(
 )
 app.use(express.static('public'))
 
-const restaurantModel = require('./models/restaurantModel')
-
-app.get('/', (req, res) => {
-  async function createIndexPage() {
-    try {
-      const restaurantList = await restaurantModel.find().lean()
-      res.render('index', { restaurantList })
-    } catch (err) {
-      console.log(err)
-    }
-  }
-  createIndexPage()
-})
+app.use(routes)
 
 app.listen(PORT, () => {
   console.log(`Express is running on http://localhost:${PORT}`)
