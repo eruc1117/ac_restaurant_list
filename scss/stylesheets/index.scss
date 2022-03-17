@@ -58,6 +58,15 @@
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+a {
+  text-decoration: none;
+  color: black;
+  &:hover{
+  text-decoration: none;
+  color: rgb(116, 116, 116);
+  }
+}
+
 .crud {
   margin-top: -3%;
   margin-bottom: 5%;
@@ -147,6 +156,12 @@
 
 .drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單*/
   display: block;
+}
+
+.card.box {
+  background-color:  rgba(0, 0, 0, 0);
+  box-shadow: none;
+  border: 0px;
 }
 
 @media screen and (max-width: 992px) {
