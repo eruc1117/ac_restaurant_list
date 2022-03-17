@@ -64,4 +64,18 @@ router.post('/create', (req, res) => {
   createRestaurant()
 })
 
+//刪除餐廳相關路由
+router.get('/delete/:id', (req, res) => {
+  async function deleteAccount() {
+    try {
+      const id = req.params.id
+      await RestaurantModel.findOneAndDelete({ id })
+      res.redirect('/')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  deleteAccount()
+})
+
 module.exports = router
