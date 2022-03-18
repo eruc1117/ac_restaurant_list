@@ -1,0 +1,26 @@
+<div class="wrap mt-5 mx-auto border border-dark border-5 w-50">
+  <h1 class="text-center">
+    Login
+  </h1>
+  <form action="/login" method="post">
+    <div class="login mt-5 mx-auto ">
+      <div class="d-flex flex-column">
+        <label class="mx-auto" for="user">User Email</label>
+        <input type="text" class="mb-4 w-75 mx-auto" placeholder="User email" aria-label="User email" id="user"
+          name="email" required>
+        <label class="mx-auto" for="password">Password</label>
+        <input type="text" class=" mb-5 w-75 mx-auto" placeholder="Password" aria-label="User password" name="password"
+          id="password" required>
+      </div>
+    </div>
+    <p class="lead mt-4 text-center">
+      No Account? <a href="/register">Register</a>
+    </p>
+    <div class="d-flex justify-content-center" id="cantrip">
+      <button type="submit" class="btn btn-dark w-50 mb-2" id="login">Login</button>
+    </div>
+    <div class="d-flex justify-content-center">
+      <a href="/auth/facebook" class="btn btn-info btn-block w-50  mb-2">Facebook Login</a>
+    </div>
+  </form>
+</div>
