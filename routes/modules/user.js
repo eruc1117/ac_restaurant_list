@@ -4,11 +4,13 @@ const RestaurantModel = require('../../models/restaurantModel')
 
 //餐廳排列方式
 router.get('/login', (req, res) => {
-  res.render('login')
+  res.render('login',)
 })
 
 router.get('/register', (req, res) => {
-  res.render('register')
+  res.render('register', {
+    cssStyle: '/stylesheets/register.css'
+  })
 })
 
 module.exports = router
