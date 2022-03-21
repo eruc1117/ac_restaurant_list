@@ -2,15 +2,15 @@
   <h1 class="text-center">
     Register
   </h1>
-  <form action="/register" method="post">
+  <form action="/user/register" method="post">
     <div class="login mt-5 mx-auto ">
       <div class="d-flex flex-column">
         <label class="mx-auto" for="user">User Name</label>
-        <input type="text" class="mb-4 w-75 mx-auto" placeholder="User Name" name="name" value="{{info.name}}"
+        <input type="text" class="mb-4 w-75 mx-auto" placeholder="User Name" name="name" value="{{userInfo.name}}"
           aria-label=" User email" id="user">
         <label class="mx-auto" for="user">User Email</label>
         <input type="text" class="mb-4 w-75 mx-auto" placeholder="User email" aria-label="User email" name="email"
-          value="{{info.email}}" required>
+          value="{{userInfo.email}}" required>
         <label class="mx-auto" for="password">Password</label>
         <input type="text" class=" mb-4 w-75 mx-auto" placeholder="Password" aria-label="User Password" name="password"
           id="password" required>

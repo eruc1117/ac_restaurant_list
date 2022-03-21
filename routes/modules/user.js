@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const RestaurantModel = require('../../models/restaurantModel')
+const userModel = require('../../models/userModel')
 
 //餐廳排列方式
 router.get('/login', (req, res) => {
@@ -11,6 +11,24 @@ router.get('/register', (req, res) => {
   res.render('register', {
     cssStyle: '/stylesheets/register.css'
   })
+})
+
+router.post('/register', (req, res) => {
+  async function register(req) {
+    const newUser = req.body
+    const totalInfo = await userModel.find().lean()
+    const userInfo = totalInfo.filter(item => item.email === newUser.email)
+    if (userInfo.length === 1) {
+      console.log('User already exists.')
+      return res.render('register', { userInfo: userInfo[0] })
+    }
+    totalInfo.length !== 0 ?
+      newUser['id'] = Number(totalInfo[totalInfo.length - 1].id) + 1 :
+      newUser['id'] = 1
+    await userModel.create(newUser)
+    res.redirect('/user/login')
+  }
+  register(req)
 })
 
 module.exports = router
