@@ -30,13 +30,13 @@ router.get('/edit/:id', (req, res) => {
   createEditPage(id)
 })
 
-router.post('/edit/:id', (req, res) => {
+router.put('/edit/:id', (req, res) => {
   const id = req.params.id
   console.log(id)
   const body = (req.body)
   let newBody = cusFunction.bodyDataEdit(body)
   return RestaurantModel.findOneAndUpdate({ id }, newBody)
-    .then(() => res.redirect(`/crud/${id}`))
+    .then(() => res.redirect(`/restaurants/read/${id}`))
     .catch(error => console.log(error))
 })
 

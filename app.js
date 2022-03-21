@@ -4,6 +4,7 @@ const PORT = 3000
 const exphbs = require('express-handlebars')//require template engine
 const path = require('path')
 const sassMiddleware = require('node-sass-middleware')//require scss
+const methodOverride = require('method-override')
 const routes = require('./routes')
 
 
@@ -16,7 +17,7 @@ app.set('view engine', 'handlebars')
 
 //表單資料處理
 app.use(express.urlencoded({ extended: true }))
-
+app.use(methodOverride('_method'))
 app.use(
   sassMiddleware({
     src: path.join(__dirname, 'scss'),
@@ -26,7 +27,6 @@ app.use(
   })
 )
 app.use(express.static('public'))
-
 app.use(routes)
 
 app.listen(PORT, () => {

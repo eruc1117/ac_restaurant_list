@@ -1,7 +1,7 @@
 <h1>修改餐廳資料</h1>
 
 <div class="edit-container">
-  <form action="/crud/edit/{{ restaurant.id }}" method="POST">
+  <form action="/restaurants/edit/{{ restaurant.id }}?_method=PUT" method="POST">
     <div class="input-block">
       <label for="restaurantName">Name</label>
       <input type="text" id="restaurantName" name="name" value="{{restaurant.name}} " required>
