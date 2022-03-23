@@ -1,11 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const userSchema = new Schema({
-  id: {
-    type: Number,
-    required: true,
-    unique: true
-  },
+  //如果給User id編號，後面序列化會出現錯誤
   name: {
     type: String,
     required: true,

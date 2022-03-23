@@ -5,7 +5,9 @@ const exphbs = require('express-handlebars')//require template engine
 const path = require('path')
 const sassMiddleware = require('node-sass-middleware')//require scss
 const methodOverride = require('method-override')
+const usePassport = require('./config/passport')
 const routes = require('./routes')
+const session = require('express-session')
 
 
 //連線mongoose
@@ -25,8 +27,14 @@ app.use(
     debug: true,
     outputStyle: 'compressed',
   })
-)
+  )
 app.use(express.static('public'))
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
+usePassport(app)
 app.use(routes)
 
 app.listen(PORT, () => {

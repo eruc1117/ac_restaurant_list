@@ -1,12 +1,19 @@
 const express = require('express')
 const router = express.Router()
 const userModel = require('../../models/userModel')
+const passport = require('passport')
 
-//餐廳排列方式
+//登入路由
 router.get('/login', (req, res) => {
   res.render('login',)
 })
 
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/user/login'
+}))
+
+//註冊路由
 router.get('/register', (req, res) => {
   res.render('register', {
     cssStyle: '/stylesheets/register.css'
