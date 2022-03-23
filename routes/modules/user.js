@@ -38,4 +38,10 @@ router.post('/register', (req, res) => {
   register(req)
 })
 
+//登出路由
+router.get('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/user/login')
+})
+
 module.exports = router
