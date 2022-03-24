@@ -27,7 +27,7 @@ app.use(
     debug: true,
     outputStyle: 'compressed',
   })
-  )
+)
 app.use(express.static('public'))
 app.use(session({
   secret: 'ThisIsMySecret',
@@ -35,6 +35,13 @@ app.use(session({
   saveUninitialized: true
 }))
 usePassport(app)
+//要先進行身份驗證
+app.use((req, res, next) => {
+  // 你可以在這裡 console.log(req.user) 等資訊來觀察
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 app.use(routes)
 
 app.listen(PORT, () => {
