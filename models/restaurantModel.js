@@ -61,6 +61,12 @@ const restaurantSchema = new Schema({
   sameName: {
     type: Boolean,
     required: false
+  },
+  userId: {  // 加入關聯設定
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true,
+    required: true
   }
 })
 
