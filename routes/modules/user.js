@@ -10,7 +10,8 @@ router.get('/login', (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/user/login'
+  failureRedirect: '/user/login',
+  failureMessage: true
 }))
 
 //註冊路由
@@ -27,7 +28,8 @@ router.post('/register', (req, res) => {
     const userInfo = totalInfo.filter(item => item.email === newUser.email)
     if (userInfo.length === 1) {
       console.log('User already exists.')
-      return res.render('register', { userInfo: userInfo[0] })
+      const errorMsg = '這個 Email 已經註冊過了。'
+      return res.render('register', { userInfo: userInfo[0], error_msg: errorMsg })
     }
     totalInfo.length !== 0 ?
       newUser['id'] = Number(totalInfo[totalInfo.length - 1].id) + 1 :
@@ -41,6 +43,7 @@ router.post('/register', (req, res) => {
 //登出路由
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '你已經成功登出。')
   res.redirect('/user/login')
 })
 

@@ -1,14 +1,16 @@
 const express = require('express')
-const app = express()
-const PORT = 3000
 const exphbs = require('express-handlebars')//require template engine
 const path = require('path')
 const sassMiddleware = require('node-sass-middleware')//require scss
 const methodOverride = require('method-override')
+const session = require('express-session')
+const flash = require('connect-flash')
+
 const usePassport = require('./config/passport')
 const routes = require('./routes')
-const session = require('express-session')
 
+const app = express()
+const PORT = 3000
 
 //連線mongoose
 require('./config/mongoose')
@@ -17,9 +19,14 @@ require('./config/mongoose')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-//表單資料處理
-app.use(express.urlencoded({ extended: true }))
-app.use(methodOverride('_method'))
+//session設定
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
+
+//用SCSS生成CSS
 app.use(
   sassMiddleware({
     src: path.join(__dirname, 'scss'),
@@ -28,20 +35,26 @@ app.use(
     outputStyle: 'compressed',
   })
 )
+//使用method override
+app.use(methodOverride('_method'))
+
+//使用public設定
 app.use(express.static('public'))
-app.use(session({
-  secret: 'ThisIsMySecret',
-  resave: false,
-  saveUninitialized: true
-}))
+
+//表單資料處理
+app.use(express.urlencoded({ extended: true }))
+
 usePassport(app)
-//要先進行身份驗證
+app.use(flash())
 app.use((req, res, next) => {
-  // 你可以在這裡 console.log(req.user) 等資訊來觀察
-  res.locals.isAuthenticated = req.isAuthenticated()
-  res.locals.user = req.user
+  res.locals.isAuthenticated = req.isAuthenticated()//true or false
+  res.locals.user = req.user // passport.js 中User.findOne({ email }),user回傳
+  res.locals.success_msg = req.flash('success_msg')  // 設定 success_msg 訊息
+  res.locals.warning_msg = req.flash('warning_msg')  // 設定 warning_msg 訊息
+  res.locals.msg = req.session.messages// passport.js 中done(null, false, { message: 'That email is not registered!' })的message回傳
   next()
 })
+// 將 request 導入路由器
 app.use(routes)
 
 app.listen(PORT, () => {
