@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const userModel = require('../../models/userModel')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 //登入路由
 router.get('/login', (req, res) => {
@@ -34,6 +35,9 @@ router.post('/register', (req, res) => {
     totalInfo.length !== 0 ?
       newUser['id'] = Number(totalInfo[totalInfo.length - 1].id) + 1 :
       newUser['id'] = 1
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(newUser.password, salt)
+    newUser.password = hash
     await userModel.create(newUser)
     res.redirect('/user/login')
   }
