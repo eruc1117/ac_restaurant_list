@@ -9,6 +9,8 @@ const restaurants = require('./modules/restaurants')
 const sort = require('./modules/sort')
 const search = require('./modules/search')
 const user = require('./modules/user')
+const auth = require('./modules/auth')
+
 
 // 將網址結構符合 /restaurants 字串的 request 導向 crud 模組 
 router.use('/restaurants', authenticator, restaurants)
@@ -18,6 +20,8 @@ router.use('/sort', authenticator, sort)
 router.use('/search', authenticator, search)
 // 將網址結構符合 /user 字串的 request 導向 user 模組 
 router.use('/user', user)
+//FB登入路由
+router.use('/auth', auth)
 // 將網址結構符合 / 字串的 request 導向 restaurantList 模組 
 router.use('/', authenticator, restaurantList)
 

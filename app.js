@@ -5,12 +5,15 @@ const sassMiddleware = require('node-sass-middleware')//require scss
 const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const usePassport = require('./config/passport')
 const routes = require('./routes')
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT
 
 //連線mongoose
 require('./config/mongoose')

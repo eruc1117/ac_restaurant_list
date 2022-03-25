@@ -25,19 +25,16 @@ router.get('/register', (req, res) => {
 router.post('/register', (req, res) => {
   async function register(req) {
     const newUser = req.body
-    const totalInfo = await userModel.find().lean()
-    const userInfo = totalInfo.filter(item => item.email === newUser.email)
-    if (userInfo.length === 1) {
+    const repeat = await userModel.findOne({ email: newUser.email }).lean()
+    if (repeat) {
       console.log('User already exists.')
       const errorMsg = '這個 Email 已經註冊過了。'
-      return res.render('register', { userInfo: userInfo[0], error_msg: errorMsg })
+      return res.render('register', { userInfo: newUser, error_msg: errorMsg })
     }
-    totalInfo.length !== 0 ?
-      newUser['id'] = Number(totalInfo[totalInfo.length - 1].id) + 1 :
-      newUser['id'] = 1
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(newUser.password, salt)
     newUser.password = hash
+    newUser.confirmPassword = hash
     await userModel.create(newUser)
     res.redirect('/user/login')
   }
