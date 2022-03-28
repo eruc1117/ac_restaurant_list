@@ -1,4 +1,16 @@
 <h1 class="mb-1 restaurant-show-title">{{restaurantInfo.name}}</h1>
+<div class="cud-container">
+  <div>
+    <div class="cud">功能列表
+      <ul>
+        <li><a href="/restaurants/create">新增餐廳</a></li>
+        <li><a href="/restaurants/edit/{{restaurantInfo.id}}">修改餐廳</a></li>
+        <li><a href="/restaurants/delete/{{restaurantInfo.id}}">刪除餐廳</a></li>
+        <li><a href="/">回到首頁</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
