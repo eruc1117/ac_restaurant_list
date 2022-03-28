@@ -4,7 +4,6 @@ const userSchema = new Schema({
   //如果給User id編號，後面序列化會出現錯誤
   name: {
     type: String,
-    required: true,
     trim: true
   },
   email: {
@@ -19,7 +18,6 @@ const userSchema = new Schema({
   },
   confirmPassword: {
     type: String,
-    required: true,
     trim: true
   }
 })
