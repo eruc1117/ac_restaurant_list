@@ -1,7 +1,7 @@
 f = open('.env', 'a')
 ID = input('輸入FACEBOOK_ID')
 SECRET = input('輸入FACEBOOK_SECRET')
-MONGODB_URI = input('輸入MONGODB_URI')
+MONGODB_URI = input('輸入MONGODB資料庫名稱')
 f.write('FACEBOOK_ID=' + ID + '\n')
 f.write('FACEBOOK_SECRET=' + SECRET + '\n')
 f.write('FACEBOOK_CALLBACK=http://localhost:3000/auth/facebook/callback\n')
