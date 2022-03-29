@@ -109,6 +109,3 @@ restaurant:
 
 ![image](screenshot/register_page.png)
 顯示註冊畫面
-
-## improvement
-
