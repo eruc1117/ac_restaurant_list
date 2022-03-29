@@ -26,6 +26,11 @@ router.post('/register', (req, res) => {
   async function register(req) {
     const newUser = req.body
     const repeat = await userModel.findOne({ email: newUser.email }).lean()
+    if (newUser.password !== newUser.confirmPassword) {
+      console.log('User already exists.')
+      const errorMsg = '密碼跟確認密碼不同！'
+      return res.render('register', { userInfo: newUser, error_msg: errorMsg })
+    }
     if (repeat) {
       console.log('User already exists.')
       const errorMsg = '這個 Email 已經註冊過了。'
